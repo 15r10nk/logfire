@@ -6,7 +6,7 @@ from typing import Any
 from unittest import mock
 
 import pytest
-from inline_snapshot import snapshot
+from inline_snapshot import Is, snapshot
 from opentelemetry.context import Context
 from opentelemetry.instrumentation.aws_lambda import _HANDLER  # type: ignore[import]
 from opentelemetry.propagate import extract
@@ -68,14 +68,14 @@ def test_instrument_aws_lambda(exporter: TestExporter) -> None:
                 },
             },
             {
-                'name': HANDLER_NAME,
+                'name': Is(HANDLER_NAME),
                 'context': {'trace_id': 1, 'span_id': 3, 'is_remote': False},
                 'parent': {'trace_id': 1, 'span_id': 1, 'is_remote': True},
                 'start_time': 3000000000,
                 'end_time': 4000000000,
                 'attributes': {
                     'logfire.span_type': 'span',
-                    'logfire.msg': HANDLER_NAME,
+                    'logfire.msg': Is(HANDLER_NAME),
                     'cloud.resource_id': 'arn:aws:lambda:us-east-1:123456:function:myfunction:myalias',
                     'faas.invocation_id': 'mock_aws_request_id',
                     'cloud.account.id': '123456',

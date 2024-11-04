@@ -114,7 +114,16 @@ def test_sqlalchemy_instrumentation(exporter: TestExporter):
 CREATE TABLE auth_records ( id INTEGER … t VARCHAR NOT NULL, PRIMARY KEY (id)
 )\
 """,
-                    'db.statement': '\nCREATE TABLE auth_records (\n\tid INTEGER NOT NULL, \n\tnumber INTEGER NOT NULL, \n\tcontent VARCHAR NOT NULL, \n\tPRIMARY KEY (id)\n)\n\n',
+                    'db.statement': """\
+
+CREATE TABLE auth_records (
+	id INTEGER NOT NULL, \n\
+	number INTEGER NOT NULL, \n\
+	content VARCHAR NOT NULL, \n\
+	PRIMARY KEY (id)
+)
+
+""",
                     'db.system': 'sqlite',
                     'db.name': 'example1.db',
                 },
@@ -184,7 +193,11 @@ CREATE TABLE auth_records ( id INTEGER … t VARCHAR NOT NULL, PRIMARY KEY (id)
                 'attributes': {
                     'logfire.span_type': 'span',
                     'logfire.msg': 'SELECT auth_recor…ds_content FROM auth_records WHERE …',
-                    'db.statement': 'SELECT auth_records.id AS auth_records_id, auth_records.number AS auth_records_number, auth_records.content AS auth_records_content \nFROM auth_records \nWHERE auth_records.id = ?',
+                    'db.statement': """\
+SELECT auth_records.id AS auth_records_id, auth_records.number AS auth_records_number, auth_records.content AS auth_records_content \n\
+FROM auth_records \n\
+WHERE auth_records.id = ?\
+""",
                     'db.system': 'sqlite',
                     'db.name': 'example1.db',
                 },
@@ -287,8 +300,20 @@ async def test_sqlalchemy_async_instrumentation(exporter: TestExporter):
                 'end_time': 8000000000,
                 'attributes': {
                     'logfire.span_type': 'span',
-                    'logfire.msg': 'CREATE TABLE auth_records ( id INTEGER … t VARCHAR NOT NULL, PRIMARY KEY (id)\n)',
-                    'db.statement': '\nCREATE TABLE auth_records (\n\tid INTEGER NOT NULL, \n\tnumber INTEGER NOT NULL, \n\tcontent VARCHAR NOT NULL, \n\tPRIMARY KEY (id)\n)\n\n',
+                    'logfire.msg': """\
+CREATE TABLE auth_records ( id INTEGER … t VARCHAR NOT NULL, PRIMARY KEY (id)
+)\
+""",
+                    'db.statement': """\
+
+CREATE TABLE auth_records (
+	id INTEGER NOT NULL, \n\
+	number INTEGER NOT NULL, \n\
+	content VARCHAR NOT NULL, \n\
+	PRIMARY KEY (id)
+)
+
+""",
                     'db.system': 'sqlite',
                     'db.name': 'example2.db',
                 },
@@ -359,7 +384,9 @@ async def test_sqlalchemy_async_instrumentation(exporter: TestExporter):
                     'logfire.span_type': 'span',
                     'logfire.msg': 'SELECT auth_recor…ds_content FROM auth_records WHERE …',
                     'db.statement': """\
-SELECT auth_records.id AS auth_records_id, auth_records.number AS auth_records_number, auth_records.content AS auth_records_content \nFROM auth_records \nWHERE auth_records.id = ?\
+SELECT auth_records.id AS auth_records_id, auth_records.number AS auth_records_number, auth_records.content AS auth_records_content \n\
+FROM auth_records \n\
+WHERE auth_records.id = ?\
 """,
                     'db.system': 'sqlite',
                     'db.name': 'example2.db',

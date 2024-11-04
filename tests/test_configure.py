@@ -17,7 +17,7 @@ import pytest
 import requests.exceptions
 import requests_mock
 from dirty_equals import IsStr
-from inline_snapshot import snapshot
+from inline_snapshot import Is, snapshot
 from opentelemetry._logs import get_logger_provider
 from opentelemetry.exporter.otlp.proto.http._log_exporter import OTLPLogExporter
 from opentelemetry.exporter.otlp.proto.http.metric_exporter import OTLPMetricExporter
@@ -692,7 +692,7 @@ def test_otel_service_name_env_var(config_kwargs: dict[str, Any], exporter: Test
                         'service.instance.id': '00000000000000000000000000000000',
                         'process.runtime.name': 'cpython',
                         'process.runtime.version': IsStr(regex=PROCESS_RUNTIME_VERSION_REGEX),
-                        'process.runtime.description': sys.version,
+                        'process.runtime.description': Is(sys.version),
                         'process.pid': 1234,
                     }
                 },
@@ -738,7 +738,7 @@ def test_otel_otel_resource_attributes_env_var(config_kwargs: dict[str, Any], ex
                         'process.pid': 1234,
                         'process.runtime.name': 'cpython',
                         'process.runtime.version': IsStr(regex=PROCESS_RUNTIME_VERSION_REGEX),
-                        'process.runtime.description': sys.version,
+                        'process.runtime.description': Is(sys.version),
                     }
                 },
             }
@@ -785,7 +785,7 @@ def test_otel_service_name_has_priority_on_otel_resource_attributes_service_name
                         'process.pid': 1234,
                         'process.runtime.name': 'cpython',
                         'process.runtime.version': IsStr(regex=PROCESS_RUNTIME_VERSION_REGEX),
-                        'process.runtime.description': sys.version,
+                        'process.runtime.description': Is(sys.version),
                     }
                 },
             }
@@ -1846,7 +1846,7 @@ def test_environment(config_kwargs: dict[str, Any], exporter: TestExporter):
                         'process.pid': 1234,
                         'process.runtime.name': 'cpython',
                         'process.runtime.version': IsStr(regex=PROCESS_RUNTIME_VERSION_REGEX),
-                        'process.runtime.description': sys.version,
+                        'process.runtime.description': Is(sys.version),
                         'service.version': '1.2.3',
                         'deployment.environment.name': 'production',
                     }
@@ -1896,9 +1896,9 @@ def test_code_source(config_kwargs: dict[str, Any], exporter: TestExporter):
                         'process.pid': 1234,
                         'process.runtime.name': 'cpython',
                         'process.runtime.version': IsStr(regex=PROCESS_RUNTIME_VERSION_REGEX),
-                        'process.runtime.description': sys.version,
+                        'process.runtime.description': Is(sys.version),
                         'logfire.code.root_path': 'logfire',
-                        'logfire.code.work_dir': os.getcwd(),
+                        'logfire.code.work_dir': Is(os.getcwd()),
                         'vcs.repository.url.full': 'https://github.com/pydantic/logfire',
                         'vcs.repository.ref.revision': 'main',
                         'service.version': '1.2.3',
@@ -1948,8 +1948,8 @@ def test_code_source_without_root_path(config_kwargs: dict[str, Any], exporter: 
                         'process.pid': 1234,
                         'process.runtime.name': 'cpython',
                         'process.runtime.version': IsStr(regex=PROCESS_RUNTIME_VERSION_REGEX),
-                        'process.runtime.description': sys.version,
-                        'logfire.code.work_dir': os.getcwd(),
+                        'process.runtime.description': Is(sys.version),
+                        'logfire.code.work_dir': Is(os.getcwd()),
                         'vcs.repository.url.full': 'https://github.com/pydantic/logfire',
                         'vcs.repository.ref.revision': 'main',
                         'service.version': '1.2.3',

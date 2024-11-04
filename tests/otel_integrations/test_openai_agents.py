@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Any
 import numpy as np
 import pytest
 from dirty_equals import IsInt, IsStr
-from inline_snapshot import snapshot
+from inline_snapshot import Is, snapshot
 from openai import AsyncOpenAI
 
 import logfire
@@ -1637,8 +1637,8 @@ def test_unknown_span(exporter: TestExporter):
             'id': 'span_789',
             'trace_id': 'trace_123',
             'parent_id': None,
-            'started_at': s.started_at,
-            'ended_at': s.ended_at,
+            'started_at': Is(s.started_at),
+            'ended_at': Is(s.ended_at),
             'span_data': {'foo': 'bar', 'type': 'my_span'},
             'error': None,
         }
