@@ -15,7 +15,7 @@ from unittest.mock import call, patch
 import inline_snapshot.extra
 import pytest
 import requests_mock
-from inline_snapshot import snapshot
+from inline_snapshot import Is, snapshot
 from opentelemetry.exporter.otlp.proto.http.metric_exporter import OTLPMetricExporter
 from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
 from opentelemetry.metrics import NoOpMeterProvider, get_meter_provider
@@ -1740,7 +1740,7 @@ def test_code_source(config_kwargs: dict[str, Any], exporter: TestExporter):
                         'service.name': 'unknown_service',
                         'process.pid': 1234,
                         'logfire.code.root_path': 'logfire',
-                        'logfire.code.work_dir': os.getcwd(),
+                        'logfire.code.work_dir': Is(os.getcwd()),
                         'vcs.repository.url.full': 'https://github.com/pydantic/logfire',
                         'vcs.repository.ref.revision': 'main',
                         'service.version': '1.2.3',
@@ -1788,7 +1788,7 @@ def test_code_source_without_root_path(config_kwargs: dict[str, Any], exporter: 
                         'telemetry.sdk.version': '0.0.0',
                         'service.name': 'unknown_service',
                         'process.pid': 1234,
-                        'logfire.code.work_dir': os.getcwd(),
+                        'logfire.code.work_dir': Is(os.getcwd()),
                         'vcs.repository.url.full': 'https://github.com/pydantic/logfire',
                         'vcs.repository.ref.revision': 'main',
                         'service.version': '1.2.3',

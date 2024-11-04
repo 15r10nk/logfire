@@ -127,7 +127,7 @@ dev = [
     "opentelemetry-instrumentation-sqlite3",
     "eval-type-backport",
     "requests-mock",
-    "inline-snapshot",
+    "inline-snapshot>=0.15",
     "structlog",
     "loguru",
     "ruff",
