@@ -219,12 +219,12 @@ is_exception,count(*)
 false,37
 true,1
 """)
-        assert client.query_csv(sql, min_timestamp=datetime(2030, 1, 1, tzinfo=timezone.utc)) == snapshot("""\
-is_exception,count(*)
-""")
-        assert client.query_csv(sql, max_timestamp=datetime(2020, 1, 1, tzinfo=timezone.utc)) == snapshot("""\
-is_exception,count(*)
-""")
+        assert client.query_csv(sql, min_timestamp=datetime(2030, 1, 1, tzinfo=timezone.utc)) == snapshot(
+            'is_exception,count(*)\n'
+        )
+        assert client.query_csv(sql, max_timestamp=datetime(2020, 1, 1, tzinfo=timezone.utc)) == snapshot(
+            'is_exception,count(*)\n'
+        )
         assert client.query_csv(sql, limit=1) == snapshot("""\
 is_exception,count(*)
 false,37
@@ -245,12 +245,12 @@ is_exception,count(*)
 false,37
 true,1
 """)
-        assert await client.query_csv(sql, min_timestamp=datetime(2030, 1, 1, tzinfo=timezone.utc)) == snapshot("""\
-is_exception,count(*)
-""")
-        assert await client.query_csv(sql, max_timestamp=datetime(2020, 1, 1, tzinfo=timezone.utc)) == snapshot("""\
-is_exception,count(*)
-""")
+        assert await client.query_csv(sql, min_timestamp=datetime(2030, 1, 1, tzinfo=timezone.utc)) == snapshot(
+            'is_exception,count(*)\n'
+        )
+        assert await client.query_csv(sql, max_timestamp=datetime(2020, 1, 1, tzinfo=timezone.utc)) == snapshot(
+            'is_exception,count(*)\n'
+        )
         assert await client.query_csv(sql, limit=1) == snapshot("""\
 is_exception,count(*)
 false,37
