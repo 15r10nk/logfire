@@ -387,8 +387,6 @@ def test_verbose_attributes(exporter: TestExporter) -> None:
                     'd': '{"a":1,"b":2}',
                     'logfire.json_schema': '{"type":"object","properties":{"name":{},"d":{"type":"object"}}}',
                 },
-                events=None,
-                resource=None,
             )
         ]
     )
@@ -454,8 +452,6 @@ def test_tags(exporter: TestExporter):
                     'code.function': 'test_tags',
                     'logfire.tags': ('tag1', 'tag2'),
                 },
-                events=None,
-                resource=None,
             )
         ]
     )
@@ -495,8 +491,6 @@ def test_levels(exporter: TestExporter):
                     'code.filepath': 'test_console_exporter.py',
                     'code.function': 'test_levels',
                 },
-                events=None,
-                resource=None,
             ),
             ReadableSpanModel(
                 name='debug message',
@@ -513,8 +507,6 @@ def test_levels(exporter: TestExporter):
                     'code.filepath': 'test_console_exporter.py',
                     'code.function': 'test_levels',
                 },
-                events=None,
-                resource=None,
             ),
             ReadableSpanModel(
                 name='info message',
@@ -531,8 +523,6 @@ def test_levels(exporter: TestExporter):
                     'code.filepath': 'test_console_exporter.py',
                     'code.function': 'test_levels',
                 },
-                events=None,
-                resource=None,
             ),
             ReadableSpanModel(
                 name='notice message',
@@ -549,8 +539,6 @@ def test_levels(exporter: TestExporter):
                     'code.filepath': 'test_console_exporter.py',
                     'code.function': 'test_levels',
                 },
-                events=None,
-                resource=None,
             ),
             ReadableSpanModel(
                 name='warn message',
@@ -567,8 +555,6 @@ def test_levels(exporter: TestExporter):
                     'code.filepath': 'test_console_exporter.py',
                     'code.function': 'test_levels',
                 },
-                events=None,
-                resource=None,
             ),
             ReadableSpanModel(
                 name='error message',
@@ -585,8 +571,6 @@ def test_levels(exporter: TestExporter):
                     'code.filepath': 'test_console_exporter.py',
                     'code.function': 'test_levels',
                 },
-                events=None,
-                resource=None,
             ),
             ReadableSpanModel(
                 name='fatal message',
@@ -603,8 +587,6 @@ def test_levels(exporter: TestExporter):
                     'code.filepath': 'test_console_exporter.py',
                     'code.function': 'test_levels',
                 },
-                events=None,
-                resource=None,
             ),
         ]
     )
@@ -734,7 +716,6 @@ def test_exception(exporter: TestExporter) -> None:
                         },
                     }
                 ],
-                resource=None,
             )
         ]
     )
