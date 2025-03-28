@@ -182,12 +182,14 @@ docs = [
     "markdownify>=0.14.1",
 ]
 
+
 [tool.inline-snapshot]
 default-flags = ["disable"]
 format-command="ruff format --stdin-filename {filename}"
 
 [tool.uv.sources]
 logfire-api = { workspace = true }
+inline-snapshot = {git="https://github.com/15r10nk/inline-snapshot", branch="new_defaults"}
 
 [tool.uv]
 default-groups = ["dev", "docs"]
